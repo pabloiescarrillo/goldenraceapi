@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.goldenrace</groupId>
 	<artifactId>tickets</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<name>tickets</name>
 	<description>Tickets API Rest Project</description>
 	<properties>
