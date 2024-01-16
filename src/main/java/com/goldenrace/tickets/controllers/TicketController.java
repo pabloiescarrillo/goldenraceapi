@@ -22,7 +22,7 @@ import com.goldenrace.tickets.models.Ticket;
 import com.goldenrace.tickets.services.TicketService;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:8080/golden-race")
+@CrossOrigin(origins = *")
 @RequestMapping("/api")
 public class TicketController {
 
