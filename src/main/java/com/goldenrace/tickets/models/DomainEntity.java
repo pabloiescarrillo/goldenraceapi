@@ -27,6 +27,7 @@ public abstract class DomainEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonProperty("id")
 	protected int id;
 	
 	@Version
