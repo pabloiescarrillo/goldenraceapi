@@ -13,4 +13,6 @@ import com.goldenrace.tickets.models.Ticket;
 public interface TicketRepository extends CrudRepository<Ticket, Integer> {
 
 	List<Ticket> findByCreationDateBetween(LocalDateTime to, LocalDateTime from);
+	
+	List<Ticket> findByTotalAmount(Double totalAmount);
 }

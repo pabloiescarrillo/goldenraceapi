@@ -13,6 +13,9 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -36,7 +39,7 @@ public class DetailTicket extends DomainEntity {
 	@Digits(integer = 50, fraction = 2)
 	private Double amount;
 	
-	@ManyToOne(fetch = FetchType.EAGER, optional = false)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "ticket_id")
 	private Ticket ticket;
 	
