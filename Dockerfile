@@ -10,6 +10,6 @@ RUN mvn clean package -DskipTests
 # Package stage
 FROM openjdk:11-jdk-slim
 WORKDIR /app
-COPY --from=build /app/target/tickets-0.0.4-SNAPSHOT.jar demo.jar
+COPY --from=build /app/target/tickets-0.0.5-SNAPSHOT.jar demo.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "demo.jar"]
