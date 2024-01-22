@@ -1,6 +1,7 @@
 package com.goldenrace.tickets.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -19,6 +20,10 @@ public class DetailTicketService {
 	
 	public List<DetailTicket> findAll() {
 		return (List<DetailTicket>) this.repository.findAll();
+	}
+	
+	public List<DetailTicket> findByTicketId(int ticketId){
+		return ((List<DetailTicket>) this.repository.findAll()).stream().filter(t -> t.getTicket().getId() == ticketId).collect(Collectors.toList());
 	}
 
 	public DetailTicket findById(int id) {
