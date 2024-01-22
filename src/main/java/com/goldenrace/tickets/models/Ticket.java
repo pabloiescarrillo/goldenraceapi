@@ -14,6 +14,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Past;
 
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -40,6 +41,6 @@ public class Ticket extends DomainEntity {
 	private Double totalAmount;
 	
 	@OneToMany(mappedBy = "ticket")
-	@JsonIgnoreProperties("ticket")
+	@JsonIgnore
 	private List<DetailTicket> detailTickets;
 }
