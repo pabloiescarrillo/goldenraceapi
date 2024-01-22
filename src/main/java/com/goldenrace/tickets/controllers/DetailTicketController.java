@@ -48,7 +48,7 @@ public class DetailTicketController {
 	@GetMapping("/detailTickets/{id}")
 	public List<DetailTicketDto> findByTicketId(@PathVariable("id") Integer id) {
 		log.info("id controlador: " + id);
-		return this.detailTicketMapper.detailTicketsToDetailTicketsDtos(this.detailTicketService.findByTicketId(ticketId));
+		return this.detailTicketMapper.detailTicketsToDetailTicketsDtos(this.detailTicketService.findByTicketId(id));
 	}
 	
 	/**
