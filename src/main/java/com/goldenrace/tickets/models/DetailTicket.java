@@ -36,7 +36,7 @@ public class DetailTicket extends DomainEntity {
 	@Digits(integer = 50, fraction = 2)
 	private Double amount;
 	
-	@ManyToOne(fetch = FetchType.EAGER, optional = false)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "ticket_id")
 	private Ticket ticket;
 	
