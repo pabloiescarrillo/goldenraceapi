@@ -73,4 +73,3 @@ build/
 .metadata/.plugins/org.eclipse.ui.workbench/workingsets.xml
 .mvn/wrapper/maven-wrapper.jar
 .mvn/wrapper/maven-wrapper.properties
-src/main/java/com/goldenrace/tickets/controllers/DetailTicketController.java
