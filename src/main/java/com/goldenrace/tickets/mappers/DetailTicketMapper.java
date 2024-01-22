@@ -12,7 +12,9 @@ import com.goldenrace.tickets.models.DetailTicket;
 import com.goldenrace.tickets.services.DetailTicketService;
 import com.goldenrace.tickets.services.TicketService;
 
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Component
 @Mapper
 public class DetailTicketMapper {
@@ -21,8 +23,6 @@ public class DetailTicketMapper {
 	private DetailTicketService detailTicketService;
 	@Autowired
 	private TicketService ticketService;
-	@Autowired
-	private TicketMapper ticketMapper;
 
 	public DetailTicketDto detailTicketToDetailTicketDto(DetailTicket detailTicket) {
 		DetailTicketDto result = null;
@@ -33,6 +33,7 @@ public class DetailTicketMapper {
 			result.setDescription(detailTicket.getDescription());
 			result.setTicketId(detailTicket.getTicket().getId());
 			result.setId(detailTicket.getId());
+			log.info("id: " + detailTicket.getTicket().getId());
 		}
 
 		return result;

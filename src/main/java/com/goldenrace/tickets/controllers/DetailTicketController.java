@@ -19,6 +19,8 @@ import com.goldenrace.tickets.mappers.DetailTicketMapper;
 import com.goldenrace.tickets.models.DetailTicket;
 import com.goldenrace.tickets.services.DetailTicketService;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * Controlador que maneja las operaciones relacionadas con los detalles de los tickets.
  *
@@ -26,6 +28,7 @@ import com.goldenrace.tickets.services.DetailTicketService;
  * en los detalles de los tickets, como la búsqueda por identificador de ticket, búsqueda por identificador
  * de detalle, creación, actualización y eliminación.
  */
+@Slf4j
 @RestController
 @RequestMapping("/api2")
 public class DetailTicketController {
@@ -42,8 +45,9 @@ public class DetailTicketController {
      * @param ticketId Identificador del ticket del cual se desean obtener los detalles.
      * @return Lista de detalles de tickets asociados al ticket especificado.
      */
-	@GetMapping("/detailTickets/{ticketId}")
-	public List<DetailTicketDto> findByTicketId(@PathVariable("ticketId") Integer ticketId) {
+	@GetMapping("/detailTickets/{id}")
+	public List<DetailTicketDto> findByTicketId(@PathVariable("id") Integer id) {
+		log.info("id controlador: " + id);
 		return this.detailTicketMapper.detailTicketsToDetailTicketsDtos(this.detailTicketService.findByTicketId(ticketId));
 	}
 	
