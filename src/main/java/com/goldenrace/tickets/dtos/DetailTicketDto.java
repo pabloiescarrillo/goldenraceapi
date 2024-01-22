@@ -20,6 +20,6 @@ public class DetailTicketDto {
 	private Double amount;
 	
 	@NotNull
-	private TicketDto ticket;
+	private Integer ticketId;
 	
 }

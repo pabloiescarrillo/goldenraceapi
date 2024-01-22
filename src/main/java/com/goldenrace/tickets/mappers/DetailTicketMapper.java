@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.goldenrace.tickets.dtos.DetailTicketDto;
 import com.goldenrace.tickets.models.DetailTicket;
 import com.goldenrace.tickets.services.DetailTicketService;
+import com.goldenrace.tickets.services.TicketService;
 
 
 @Component
@@ -18,6 +19,8 @@ public class DetailTicketMapper {
 	
 	@Autowired
 	private DetailTicketService detailTicketService;
+	@Autowired
+	private TicketService ticketService;
 	@Autowired
 	private TicketMapper ticketMapper;
 
@@ -28,7 +31,7 @@ public class DetailTicketMapper {
 			result = new DetailTicketDto();
 			result.setAmount(detailTicket.getAmount());
 			result.setDescription(detailTicket.getDescription());
-			result.setTicket(this.ticketMapper.ticketToTicketDto(detailTicket.getTicket()));
+			result.setTicketId(detailTicket.getTicket().getId());
 			result.setId(detailTicket.getId());
 		}
 
@@ -42,13 +45,13 @@ public class DetailTicketMapper {
 			result = this.detailTicketService.create();
 			result.setAmount(detailTicketDto.getAmount());
 			result.setDescription(detailTicketDto.getDescription());
-			result.setTicket(this.ticketMapper.ticketDtoToTicket(detailTicketDto.getTicket()));
+			result.setTicket(this.ticketService.findById(detailTicketDto.getTicketId()));
 			result.setId(detailTicketDto.getId());
 		} else if (detailTicketDto != null) {
 			result = this.detailTicketService.findById(detailTicketDto.getId());
 			result.setAmount(detailTicketDto.getAmount());
 			result.setDescription(detailTicketDto.getDescription());
-			result.setTicket(this.ticketMapper.ticketDtoToTicket(detailTicketDto.getTicket()));
+			result.setTicket(this.ticketService.findById(detailTicketDto.getTicketId()));
 		}
 
 		return result;

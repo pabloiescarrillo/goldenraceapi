@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.goldenrace.tickets.dtos.DetailTicketDto;
+import com.goldenrace.tickets.mappers.DetailTicketMapper;
 import com.goldenrace.tickets.models.DetailTicket;
 import com.goldenrace.tickets.services.DetailTicketService;
 
@@ -31,6 +33,8 @@ public class DetailTicketController {
 	
 	@Autowired
 	private DetailTicketService detailTicketService;
+	@Autowired
+	private DetailTicketMapper detailTicketMapper;
 	
 	/**
      * Endpoint para buscar detalles de tickets asociados a un ticket específico.
@@ -39,8 +43,8 @@ public class DetailTicketController {
      * @return Lista de detalles de tickets asociados al ticket especificado.
      */
 	@GetMapping("/detailTickets/{ticketId}")
-	public List<DetailTicket> findByTicketId(@PathVariable("ticketId") Integer ticketId) {
-		return this.detailTicketService.findByTicketId(ticketId);
+	public List<DetailTicketDto> findByTicketId(@PathVariable("ticketId") Integer ticketId) {
+		return this.detailTicketMapper.detailTicketsToDetailTicketsDtos(this.detailTicketService.findByTicketId(ticketId));
 	}
 	
 	/**
@@ -50,8 +54,8 @@ public class DetailTicketController {
      * @return Detalle de ticket encontrado por su identificador.
      */
 	@GetMapping("/detailTicket/{id}")
-	public DetailTicket findById(@PathVariable("id") Integer id) {
-		return this.detailTicketService.findById(id);
+	public DetailTicketDto findById(@PathVariable("id") Integer id) {
+		return this.detailTicketMapper.detailTicketToDetailTicketDto(this.detailTicketService.findById(id));
 	}
 	
 	/**
@@ -61,8 +65,8 @@ public class DetailTicketController {
      * @return Detalle de ticket recién creado.
      */
 	@PostMapping("/detailTicket")
-	public DetailTicket create(@RequestBody DetailTicket detailTicket) {
-		return this.detailTicketService.save(detailTicket);
+	public DetailTicketDto create(@RequestBody DetailTicket detailTicket) {
+		return this.detailTicketMapper.detailTicketToDetailTicketDto(this.detailTicketService.save(detailTicket));
 	}
 
 	 /**
@@ -74,12 +78,12 @@ public class DetailTicketController {
      * @throws ValidationException si el identificador proporcionado no coincide con el del objeto detailTicket.
      */
 	@PutMapping("/detailTicket/{id}")
-	public DetailTicket update(@PathVariable("id") Integer id, @RequestBody DetailTicket detailTicket) {
+	public DetailTicketDto update(@PathVariable("id") Integer id, @RequestBody DetailTicket detailTicket) {
 		
 		if (!id.equals(detailTicket.getId())) 
 			throw new ValidationException("ERROR: invalid identifier.");
 		
-		return this.detailTicketService.save(detailTicket);
+		return this.detailTicketMapper.detailTicketToDetailTicketDto(this.detailTicketService.save(detailTicket));
 		
 		
 	}
