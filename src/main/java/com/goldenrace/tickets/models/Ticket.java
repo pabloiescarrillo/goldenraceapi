@@ -42,6 +42,6 @@ public class Ticket extends DomainEntity {
 	private Double totalAmount;
 	
 	@OneToMany(mappedBy = "ticket")
-	@JsonIgnore
+	@JsonManagedReference
 	private List<DetailTicket> detailTickets;
 }

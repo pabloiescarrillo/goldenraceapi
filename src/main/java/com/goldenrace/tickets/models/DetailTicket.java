@@ -41,6 +41,7 @@ public class DetailTicket extends DomainEntity {
 	
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "ticket_id")
+	@JsonBackReference
 	private Ticket ticket;
 	
 	
