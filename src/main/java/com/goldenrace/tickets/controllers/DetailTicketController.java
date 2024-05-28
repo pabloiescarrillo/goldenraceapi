@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.goldenrace.tickets.dtos.DetailTicketDto;
+import com.goldenrace.tickets.dtos.TicketDto;
 import com.goldenrace.tickets.mappers.DetailTicketMapper;
 import com.goldenrace.tickets.models.DetailTicket;
 import com.goldenrace.tickets.services.DetailTicketService;
@@ -25,8 +26,8 @@ import lombok.extern.slf4j.Slf4j;
  * Controlador que maneja las operaciones relacionadas con los detalles de los tickets.
  *
  * Este controlador proporciona puntos finales para realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar)
- * en los detalles de los tickets, como la búsqueda por identificador de ticket, búsqueda por identificador
- * de detalle, creación, actualización y eliminación.
+ * en los detalles de los tickets, como la bï¿½squeda por identificador de ticket, bï¿½squeda por identificador
+ * de detalle, creaciï¿½n, actualizaciï¿½n y eliminaciï¿½n.
  */
 @Slf4j
 @RestController
@@ -40,7 +41,7 @@ public class DetailTicketController {
 	private DetailTicketMapper detailTicketMapper;
 	
 	/**
-     * Endpoint para buscar detalles de tickets asociados a un ticket específico.
+     * Endpoint para buscar detalles de tickets asociados a un ticket especï¿½fico.
      *
      * @param ticketId Identificador del ticket del cual se desean obtener los detalles.
      * @return Lista de detalles de tickets asociados al ticket especificado.
@@ -65,33 +66,33 @@ public class DetailTicketController {
 	/**
      * Endpoint para crear un nuevo detalle de ticket.
      *
-     * @param detailTicket Objeto DetailTicket que contiene la información del nuevo detalle de ticket.
-     * @return Detalle de ticket recién creado.
+     * @param detailTicketDto Objeto DetailTicket que contiene la informaciï¿½n del nuevo detalle de ticket.
+     * @return Detalle de ticket reciï¿½n creado.
      */
 	@PostMapping("/detailTicket")
-	public DetailTicketDto create(@RequestBody DetailTicket detailTicket) {
-		return this.detailTicketMapper.detailTicketToDetailTicketDto(this.detailTicketService.save(detailTicket));
+	public DetailTicketDto create(@RequestBody DetailTicketDto detailTicketDto) {
+		return this.detailTicketMapper.detailTicketToDetailTicketDto(this.detailTicketService.save(this.detailTicketMapper.detailTicketDtoToDetailTicket(detailTicketDto)));
 	}
 
 	 /**
      * Endpoint para actualizar un detalle de ticket existente.
      *
      * @param id Identificador del detalle de ticket que se desea actualizar.
-     * @param detailTicket Objeto DetailTicket con la información actualizada.
+     * @param detailTicketDto Objeto DetailTicket con la informaciï¿½n actualizada.
      * @return Detalle de ticket actualizado.
      * @throws ValidationException si el identificador proporcionado no coincide con el del objeto detailTicket.
      */
 	@PutMapping("/detailTicket/{id}")
-	public DetailTicketDto update(@PathVariable("id") Integer id, @RequestBody DetailTicket detailTicket) {
+	public DetailTicketDto update(@PathVariable("id") Integer id, @RequestBody DetailTicketDto detailTicketDto) {
 		
-		if (!id.equals(detailTicket.getId())) 
+		if (!id.equals(detailTicketDto.getId())) 
 			throw new ValidationException("ERROR: invalid identifier.");
 		
-		return this.detailTicketMapper.detailTicketToDetailTicketDto(this.detailTicketService.save(detailTicket));
+		return this.detailTicketMapper.detailTicketToDetailTicketDto(this.detailTicketService.save(this.detailTicketMapper.detailTicketDtoToDetailTicket(detailTicketDto)));
 		
 		
 	}
-
+	
 	/**
      * Endpoint para eliminar un detalle de ticket por su identificador.
      *
